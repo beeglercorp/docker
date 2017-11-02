@@ -1,5 +1,5 @@
 before_install:
-  - docker build -t beeglercorp .
+  - docker build -t beeglercorp --compress --force-rm --no-cache --squash .
 
 # skip the install step
 # @see https://docs.travis-ci.com/user/customizing-the-build/#Skipping-the-Installation-Step
