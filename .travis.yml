@@ -3,8 +3,8 @@ before_install:
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   - sudo apt-get update
   - sudo apt-get -y install docker-ce
+  - sudo systemctl start docker --experimental
   - docker version
-  - docker version -f '{{.Server.Experimental}}'
   - docker build -t beeglercorp --compress --force-rm --no-cache --squash .
 
 # skip the install step
