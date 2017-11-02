@@ -13,7 +13,17 @@ script:
   DOCKER_SIZE_NUMBER=${DOCKER_SIZE_STRING%MB}
 
   echo $DOCKER_SIZE_STRING
-  if [ 45 -gt $DOCKER_SIZE_NUMBER ]; then
+
+  if [ ${#DOCKER_SIZE_STRING} -eq ${#DOCKER_SIZE_NUMBER} ]; then
+    # the size is not in MB, we're going to assume it's in something greater than MB
+    # since no Docker image <1MB exists to-date
+    echo "Size >999MB."
+    exit 1
+  fi
+
+  DOCKER_SIZE_ROUNDED="$(echo $DOCKER_SIZE_NUMBER | awk '{print int($1+0.9)}')"
+
+  if [ 45 -gt $DOCKER_SIZE_ROUNDED ]; then
     echo "Ok"
     exit 0
   else
