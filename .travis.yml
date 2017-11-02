@@ -1,6 +1,13 @@
 before_install:
   - docker build -t beeglercorp .
-  - docker images
+
+# skip the install step
+# @see https://docs.travis-ci.com/user/customizing-the-build/#Skipping-the-Installation-Step
+install: true
+
+language: node_js
+
+script: docker images
 
 services:
   - docker
