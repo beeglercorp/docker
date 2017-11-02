@@ -4,7 +4,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get -y install docker-ce
   - sudo service docker stop
-  - dockerd --experimental
+  - sudo dockerd --experimental
   - docker version
   - docker build -t beeglercorp --compress --force-rm --no-cache --squash .
 
