@@ -7,7 +7,19 @@ install: true
 
 language: node_js
 
-script: docker images
+script:
+- |
+  DOCKER_SIZE_STRING="$(docker images beeglercorp --format {{.Size}})"
+  DOCKER_SIZE_NUMBER=${DOCKER_SIZE_STRING%MB}
+
+  echo $DOCKER_SIZE_STRING
+  if [ 45 -gt $DOCKER_SIZE_NUMBER ]; then
+    echo "Ok"
+    exit 0
+  else
+    echo "Fail"
+    exit 1
+  fi
 
 services:
   - docker
