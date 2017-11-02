@@ -1,0 +1,8 @@
+before_install:
+  - docker build -t beeglercorp .
+  - docker images
+
+services:
+  - docker
+
+sudo: required
