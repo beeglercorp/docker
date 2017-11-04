@@ -30,7 +30,8 @@ script:
 
   DOCKER_SIZE_ROUNDED="$(echo $DOCKER_SIZE_NUMBER | awk '{print int($1+0.9)}')"
 
-  if [ 45 -gt $DOCKER_SIZE_ROUNDED ]; then
+  # threshold is 70MB
+  if [ 70 -gt $DOCKER_SIZE_ROUNDED ]; then
     echo "Ok"
     exit 0
   else

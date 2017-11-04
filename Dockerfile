@@ -4,7 +4,10 @@ FROM alpine:3.6
 
 ARG NODE_VERSION=8.9.0
 
+# nodejs build dependencies
 RUN apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnupg libstdc++
+
+RUN apk add --no-cache yarn
 
 # gpg keys listed at https://github.com/nodejs/node#release-team
 RUN for key in \
@@ -31,7 +34,7 @@ RUN curl -sfSL https://nodejs.org/dist/v${NODE_VERSION}/SHASUMS256.txt.asc \
 RUN tar -xf node-v${NODE_VERSION}.tar.xz
 
 RUN cd node-v${NODE_VERSION} && \
-  ./configure --prefix=/usr --fully-static --without-npm && \
+  ./configure --prefix=/usr --fully-static && \
   make -j$(getconf _NPROCESSORS_ONLN) && \
   make install
 
